@@ -19,4 +19,10 @@ public interface ApiService {
             @Field("password")String password
     );
 
+    @POST("login")
+    @FormUrlEncoded
+    Call<AccessTokens> login(
+            @Field("username")String username,
+            @Field("password")String password
+    );
 }

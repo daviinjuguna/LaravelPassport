@@ -1,5 +1,6 @@
 package com.example.laravelpassport.fragment;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.basgeekball.awesomevalidation.utility.RegexTemplate;
+import com.example.laravelpassport.PostActivity;
 import com.example.laravelpassport.R;
 import com.example.laravelpassport.TokenInterface;
 import com.example.laravelpassport.TokenManager;
@@ -83,7 +85,11 @@ public class SignUpFragment extends Fragment {
         tokenManager = tokenInterface.getInstance();
         setUpRules();
 
-
+        //save login and register
+        if (tokenManager.getToken().getAccessToken() !=null){
+            Intent intent = new Intent(getActivity(), PostActivity.class);
+            startActivity(intent);
+        }
     }
 
     @OnClick(R.id.btnSignUp)
@@ -109,6 +115,8 @@ public class SignUpFragment extends Fragment {
 
                     if (response.isSuccessful()) {
                         tokenManager.saveToken(response.body());
+                        Intent intent = new Intent(getActivity(), PostActivity.class);
+                        startActivity(intent);
 
                     } else {
                         handleErrors(response.errorBody());
