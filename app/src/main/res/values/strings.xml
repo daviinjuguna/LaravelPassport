@@ -3,4 +3,7 @@
 
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="error_name">The name field is Required</string>
+    <string name="error_email">Enter a valid email</string>
+    <string name="error_password">Password 6 characters</string>
 </resources>
