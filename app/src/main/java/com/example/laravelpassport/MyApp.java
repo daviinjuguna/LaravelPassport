@@ -4,7 +4,7 @@ import android.app.Application;
 
 import com.facebook.stetho.Stetho;
 
-import leakcanary.LeakCanary;
+
 
 public class MyApp extends Application {
 

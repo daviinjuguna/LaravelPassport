@@ -1,6 +1,8 @@
 package com.example.laravelpassport.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,6 +21,7 @@ import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.basgeekball.awesomevalidation.utility.RegexTemplate;
 import com.example.laravelpassport.PostActivity;
 import com.example.laravelpassport.R;
+import com.example.laravelpassport.AuthInterface;
 import com.example.laravelpassport.TokenInterface;
 import com.example.laravelpassport.TokenManager;
 import com.example.laravelpassport.Utils;
@@ -30,10 +33,12 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -53,7 +58,16 @@ public class SignInFragment extends Fragment {
     AwesomeValidation validation;
     Call<AccessTokens> call;
 
+    private AuthInterface authInterface;
     private TokenInterface tokenInterface;
+
+    private ProgressDialog progressDialog;
+
+    public SignInFragment(AuthInterface authInterface, TokenInterface tokenInterface) {
+        this.authInterface = authInterface;
+        this.tokenInterface = tokenInterface;
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,11 +83,16 @@ public class SignInFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        service = RetrofitBuilder.createService(ApiService.class);
+
         tokenManager = tokenInterface.getInstance();
         validation = new AwesomeValidation(ValidationStyle.TEXT_INPUT_LAYOUT);
         setUpRules();
 
+
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setTitle("Signing In");
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
         //save login and register
         if (tokenManager.getToken().getAccessToken() !=null){
             Intent intent = new Intent(getActivity(), PostActivity.class);
@@ -93,7 +112,9 @@ public class SignInFragment extends Fragment {
 
         if (validation.validate()) {
 
-            call = service.login(email, password);
+           // call = service.login(email, password);
+            call = RetrofitBuilder.apiService().login( email, password);
+            progressDialog.show();
             call.enqueue(new Callback<AccessTokens>() {
                 @Override
                 public void onResponse(Call<AccessTokens> call, Response<AccessTokens> response) {
@@ -103,6 +124,7 @@ public class SignInFragment extends Fragment {
                         startActivity(intent);
 
                     } else {
+                        progressDialog.dismiss();
                         if (response.code() == 422) {
                             handleErrors(response.errorBody());
                         }
@@ -125,7 +147,7 @@ public class SignInFragment extends Fragment {
 
     @OnClick(R.id.txtSignUp)
     void register(){
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameAuthContainer,new SignUpFragment()).commit();
+        authInterface.goToRegister();
     }
 
     private void handleErrors(ResponseBody response){

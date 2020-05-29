@@ -8,6 +8,4 @@
     tools:context=".AuthActivity"
     android:id="@+id/frameAuthContainer">
 
-
-
 </FrameLayout>

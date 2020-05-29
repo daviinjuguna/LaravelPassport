@@ -66,4 +66,7 @@ dependencies {
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
+    //sweet alert
+    implementation 'com.github.f0ris.sweetalert:library:1.6.2'
+
 }

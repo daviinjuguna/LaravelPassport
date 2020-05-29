@@ -13,7 +13,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.moshi.MoshiConverterFactory;
 
 public class RetrofitBuilder {
-    private static final String BASE_URL = "http://127.0.0.1/passport/public/api/";
+    private static final String BASE_URL = "https://592bd338d0bb.ngrok.io/api/";
 
     private final static OkHttpClient client = buildClient();
     private final static Retrofit retrofit = buildRetrofit(client);
@@ -52,9 +52,12 @@ public class RetrofitBuilder {
                 .build();
     }
 
-    public static <T> T createService(Class<T> service){
+   /* public static <T> T createService(Class<T> service){
         return retrofit.create(service);
-    }
+    }*/
+   public static ApiService apiService(){
+       return retrofit.create(ApiService.class);
+   }
 
     public static Retrofit getRetrofit() {
         return retrofit;

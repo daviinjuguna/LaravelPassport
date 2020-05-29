@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.SignInFragment"
+    android:gravity="center"
     android:orientation="vertical"
     android:paddingStart="50dp"
     android:paddingEnd="50dp">
@@ -18,7 +19,7 @@
         android:textSize="32sp"
         android:fontFamily="@font/leckerlione_regular"
         android:gravity="center_horizontal"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="80dp"/>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -62,7 +63,7 @@
         android:id="@+id/btnSignIn"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        fancy:fb_defaultColor="@color/colorPrimary"
+        fancy:fb_defaultColor="@color/blue_300"
         fancy:fb_radius="15dp"
         fancy:fb_text="Sign In"
         fancy:fb_textSize="20sp"
@@ -87,13 +88,24 @@
             android:layout_height="wrap_content"
             android:text="Sign Up"
             android:textColor="@color/colorPrimary"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:id="@+id/forgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Forgot Password"
+            android:layout_marginEnd="8dp"
+            android:textColor="@color/colorPrimary"/>
     </LinearLayout>
 
-    <ProgressBar
-        android:id="@+id/loader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        android:layout_gravity="center_horizontal"/>
+
 
 </LinearLayout>

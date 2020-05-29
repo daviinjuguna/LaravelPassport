@@ -7,6 +7,7 @@
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.SignUpFragment"
     android:orientation="vertical"
+    android:gravity="center"
     android:paddingStart="50dp"
     android:paddingEnd="50dp">
 
@@ -18,8 +19,9 @@
         android:textSize="32sp"
         android:fontFamily="@font/leckerlione_regular"
         android:gravity="center_horizontal"
-        android:layout_marginTop="70dp"
-        android:layout_marginBottom="80dp"/>
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="50dp"/>
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/txtLayoutNameSignUp"
@@ -61,7 +63,7 @@
         android:id="@+id/txtLayoutPasswordSignUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="5dp"
         app:passwordToggleEnabled="true"
         app:startIconDrawable="@drawable/ic_password"
         app:startIconTint="@color/colorPrimary">
@@ -76,11 +78,30 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtConfirmLayoutPasswordSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        app:passwordToggleEnabled="true"
+        app:startIconDrawable="@drawable/ic_password"
+        app:startIconTint="@color/colorPrimary">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtConfirmPasswordSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:textSize="15sp"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
     <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/btnSignUp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        fancy:fb_defaultColor="@color/colorPrimary"
+        fancy:fb_defaultColor="@color/blue_300"
         fancy:fb_radius="15dp"
         fancy:fb_text="Sign Up"
         fancy:fb_textSize="20sp"
@@ -106,12 +127,5 @@
             android:text="Sign In"
             android:textColor="@color/colorPrimary"/>
     </LinearLayout>
-
-    <ProgressBar
-        android:id="@+id/loader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        android:layout_gravity="center_horizontal"/>
 
 </LinearLayout>

@@ -16,7 +16,8 @@ public interface ApiService {
     Call<AccessTokens> register(
             @Field("name")String name,
             @Field("email")String email,
-            @Field("password")String password
+            @Field("password")String password,
+            @Field("password_confirmation")String password_confirmation
     );
 
     @POST("login")
